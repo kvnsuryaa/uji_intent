@@ -5,10 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    int req_code = 1;
     private Button b_KmDm, b_KmCm;
+
+    private TextView tResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b_KmDm.setOnClickListener(this);
         b_KmCm.setOnClickListener(this);
 
+        tResult = findViewById(R.id.result);
+
 
     }
 
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.KmCm:
                 Intent cm = new Intent(this, Main2Activity.class);
-                startActivity(cm);
+                startActivityForResult(cm, req_code);
                 break;
 
             case R.id.KmDm:
@@ -45,4 +51,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent rtn) {
+
+        if (requestCode == req_code){
+            if (resultCode == RESULT_OK){
+                tResult.setText(rtn.getData().toString());
+            }
+        }
+
+    }
+
+
 }

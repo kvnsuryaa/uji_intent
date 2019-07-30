@@ -1,6 +1,8 @@
 package com.example.uji_intent;
 
 import android.arch.core.executor.TaskExecutor;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +58,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             if (!tidakKosong)
             {
                 int hasil = hkm * rumus;
-                report.setText("Total\n"+String.valueOf(hasil));
+                Intent data = new Intent();
+                data.setData(Uri.parse("Hasil: "+String.valueOf(hasil)));
+                setResult(RESULT_OK, data);
+
+                finish();
 
             }
 
